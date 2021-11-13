@@ -1,6 +1,6 @@
 const NavBar = () => {
     return (
-        <header>
+        <header className="bg-gray-800 text-white p-4">
             Memento Mori
         </header>
     )

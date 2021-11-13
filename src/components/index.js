@@ -1,4 +1,5 @@
 import NavBar from './NavBar/NavBar.jsx';
+import DailyQuote from './DailyQuote/DailyQuote.jsx';
 import Footer from './Footer/Footer.jsx';
 
-export { NavBar, Footer };
+export { NavBar, DailyQuote, Footer };
