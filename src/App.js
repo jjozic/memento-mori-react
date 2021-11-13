@@ -1,11 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import { NavBar, Footer } from '@components'
 
 function App() {
   return (
-    <div className="text-green-700">
-      <h1 >Hello Tailwind</h1>
-    </div>
+    <>
+      <NavBar />
+      <main>
+
+      </main>
+      <Footer />
+    </>
   );
 }
 
