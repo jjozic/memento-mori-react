@@ -1,6 +1,6 @@
 const DailyQuote = ({quote, author}) => {
   return (
-    <div className="p-10">
+    <div className="flex-1 p-10">
         <figure className="text-center">
           <blockquote>
             "{quote}"
