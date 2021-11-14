@@ -42,8 +42,11 @@ const LifeCalendar = () => {
 
   return (
     <div className="flex-1 py-8 px-4">
-      <h2 className="font-bold pb-8">Life Calendar</h2>
-      <div>{createCalendar2()}</div>
+      <h2 className="font-bold pb-8 text-lg">Life Calendar</h2>
+      <p>
+      The average human life span is 80 years. This is how much time has already passed by in your life. Use it as a reminder to think about your own mortality (Memento Mori).
+      </p>
+      <div className="py-4">{createCalendar2()}</div>
     </div>
   );
 };
