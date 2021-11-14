@@ -4,11 +4,8 @@ function App() {
   return (
     <>
       <NavBar />
-      <main className="flex flex-wrap max-w-screen-xl mx-auto">
-        <DailyQuote
-          quote="Be tolerant with others and strict with yourself."
-          author="Marcus Aurelius"
-        />
+      <main className="flex flex-wrap max-w-screen-xl mx-auto min-h-full">
+        <DailyQuote />
         <LifeCalendar />
       </main>
       <Footer />
