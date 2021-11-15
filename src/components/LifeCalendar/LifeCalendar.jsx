@@ -1,52 +1,34 @@
-const WEEKS = 36;
-const YEARS = 30;
+const MONTHS = 12;
+const YEARS = 80;
 
 const LifeCalendar = () => {
   const createCalendar = () => {
-    let rows = [];
-    for (let i = 0; i < YEARS; i++) {
-      let rowID = `row${i}`;
-      let cell = [];
-      for (let idx = 0; idx < WEEKS; idx++) {
-        let cellID = `cell${i}-${idx}`;
-        cell.push(<td className="bg-green-400 p-1 border-2 border-gray-200" key={cellID} id={cellID}></td>);
-      }
-      rows.push(
-        <tr key={i} id={rowID}>
-          {cell}
-        </tr>
+    let cells = [];
+    for (let i = 0; i < MONTHS * YEARS; i++) {
+      const cellID = `cell${i}`;
+      const color = i < 30 ? "bg-red-500" : "bg-gray-100";
+      cells.push(
+        <div className={`${color} m-0.5 w-4 h-4 border-2 border-black rounded-sm`} key={cellID} id={cellID}></div>
       );
     }
-    return rows;
-  };
-
-  const createCalendar2 = () => {
-    let rows = [];
-    for (let i = 0; i < YEARS; i++) {
-      let rowID = `row${i}`;
-      let cell = [];
-      for (let idx = 0; idx < WEEKS; idx++) {
-        let cellID = `cell${i}-${idx}`;
-        cell.push(
-          <div className="bg-gray-100 m-0.5 w-3 h-3 border-2 border-black rounded-sm" key={cellID} id={cellID}></div>
-        );
-      }
-      rows.push(
-        <div className="flex -md:justify-center" key={i} id={rowID}>
-          {cell}
-        </div>
-      );
-    }
-    return rows;
+    return cells;
   };
 
   return (
-    <div className="flex-1 py-8 px-4">
+    <div className="flex-0 md:flex-1 py-8 px-4">
       <h2 className="font-bold pb-8 text-lg">Life Calendar</h2>
-      <p>
-      The average human life span is 80 years. This is how much time has already passed by in your life. Use it as a reminder to think about your own mortality (Memento Mori).
+      <div className="flex flex-col max-w-xs gap-1">
+        <label for="start">Birth date:</label>
+        <input className="border-2 rounded p-1" type="date" id="start" name="trip-start" min="1900-01-01" max="today" />
+        <button className="bg-gray-800 text-white rounded p-1">Submit</button>
+      </div>
+
+      <p className="pt-4">
+        The average human life span is around 80 years. This is a visual representaiton of how much time has already
+        passed by in your life. Use it as a reminder to think about your own mortality (Memento Mori). Each Cell
+        represents one month of your life.
       </p>
-      <div className="py-4">{createCalendar2()}</div>
+      <div className="py-4 flex flex-wrap gap-1">{createCalendar()}</div>
     </div>
   );
 };
