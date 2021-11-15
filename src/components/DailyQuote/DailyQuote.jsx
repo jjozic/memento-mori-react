@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const STOICURL = "https://stoic-server.herokuapp.com/random";
+const stoicUrl = "https://stoic-server.herokuapp.com/random";
 
 const authors = ["aurelius", "seneca", "epictetus"];
 
@@ -10,7 +10,7 @@ const DailyQuote = () => {
   const [bgName, setBgName] = useState(null);
 
   useEffect(() => {
-    axios.get(STOICURL).then((response) => {
+    axios.get(stoicUrl).then((response) => {
       setQuote(response.data[0]);
       const resp = response.data[0].author.toLowerCase();
       for (const author of authors) {
