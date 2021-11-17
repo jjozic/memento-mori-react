@@ -7,7 +7,7 @@ const createCalendar = (ageInMonths = 0) => {
   let cells = [];
   for (let i = 0; i < MONTHS * YEARS; i++) {
     const cellID = `cell${i}`;
-    const color = i < ageInMonths ? "bg-indigo-200" : "bg-gray-100";
+    const color = i < ageInMonths ? "bg-indigo-400" : "bg-gray-100";
     cells.push(
       <div className={`${color} m-0.5 w-4 h-4 border-2 border-black rounded-sm`} key={cellID} id={cellID}></div>
     );
@@ -48,6 +48,7 @@ const LifeCalendar = () => {
           id="start"
           name="trip-start"
           min="1900-01-01"
+          max="2022-01-01"
           value={birthday}
           onChange={handleChange}
         />
