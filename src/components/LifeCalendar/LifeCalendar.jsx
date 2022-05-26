@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useStickyState from "../../hooks/useStickyState";
 
 const MONTHS = 12;
 const YEARS = 80;
@@ -24,8 +25,13 @@ const calculateAgeInMonths = (birthday) => {
 };
 
 const LifeCalendar = () => {
-  const [birthday, setBirthday] = useState(Date.now());
+  // const [birthday, setBirthday] = useState(Date.now());
   const [calendar, setCalendar] = useState(createCalendar());
+  const [birthday, setBirthday] = useStickyState(Date.now(), "birthday");
+
+  useEffect(() => {
+    setCalendar(createCalendar(calculateAgeInMonths(birthday)));
+  }, [birthday]);
 
   const handleChange = (event) => {
     setBirthday(event.target.value);
@@ -38,23 +44,19 @@ const LifeCalendar = () => {
   };
 
   return (
-    <div className="flex-0 md:flex-1 py-8 px-4">
+    <div className="flex-0 lg:flex-1 py-8 px-4">
       <h2 className="font-bold pb-8 text-lg">Life Calendar</h2>
-      <form className="flex flex-col max-w-xs gap-1" onSubmit={handleSubmit}>
-        <label htmlFor="start">Date of birth:</label>
-        <input
-          className="border-2 rounded p-1"
-          type="date"
-          id="start"
-          name="trip-start"
-          min="1900-01-01"
-          max="2022-01-01"
-          value={birthday}
-          onChange={handleChange}
-        />
-        <button className="bg-gray-800 text-white rounded p-1">Submit</button>
-      </form>
-
+      <label htmlFor="start">Date of birth: </label>
+      <input
+        className="border-2 rounded p-1"
+        type="date"
+        id="start"
+        name="trip-start"
+        min="1900-01-01"
+        max="2022-01-01"
+        value={birthday}
+        onChange={handleChange}
+      />
       <p className="pt-4">
         The average human life span is around 80 years. This is a visual representaiton of how much time has already
         passed by in your life. Use it as a reminder to think about your own mortality (Memento Mori). Each Cell

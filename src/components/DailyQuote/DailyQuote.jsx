@@ -8,8 +8,14 @@ const authors = ["aurelius", "seneca", "epictetus"];
 const DailyQuote = () => {
   const [quote, setQuote] = useState(null);
   const [bgName, setBgName] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    fetchQoute();
+  }, []);
+
+  const fetchQoute = () => {
+    setLoading(true);
     axios.get(stoicUrl).then((response) => {
       setQuote(response.data[0]);
       const resp = response.data[0].author.toLowerCase();
@@ -18,20 +24,30 @@ const DailyQuote = () => {
           setBgName(author);
         }
       }
+      setLoading(false);
     });
-  }, []);
+  };
 
   return (
-    <div className="flex-1 py-8 px-4">
+    <div className="flex-1 py-8 px-4 flex flex-col gap-2">
       <h2 className="font-bold pb-8 text-lg">Daily Inspiration</h2>
-      {quote && (
+      {quote ? (
         <div className={`py-8 bg-${bgName} bg-opacity-2 bg-no-repeat bg-center min-h-200`}>
           <figure className="text-center text-gray-700">
             <blockquote className="font-bold italic">"{quote.body}"</blockquote>
             <figcaption>-{` ${quote.author}`}</figcaption>
           </figure>
         </div>
+      ) : (
+        <span>Loading...</span>
       )}
+      <button
+        className={`text-gray-100 px-6 py-2 rounded-lg self-center ${loading ? "bg-gray-500 cursor-not-allowed" : "bg-gray-800"} `}
+        onClick={fetchQoute}
+        disabled={loading}
+      >
+        Get another quote
+      </button>
     </div>
   );
 };
