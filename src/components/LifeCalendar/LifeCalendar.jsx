@@ -37,12 +37,6 @@ const LifeCalendar = () => {
     setBirthday(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    setCalendar(createCalendar(calculateAgeInMonths(birthday)));
-  };
-
   return (
     <div className="flex-0 lg:flex-1 py-8 px-4">
       <h2 className="font-bold pb-8 text-lg">Life Calendar</h2>

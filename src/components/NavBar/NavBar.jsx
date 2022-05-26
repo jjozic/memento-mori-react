@@ -10,7 +10,7 @@ const NavBar = () => {
             {/* <li>Info</li> */}
             <li>
               <a href="https://github.com/jjozic/memento-mori-react" target="_blank" rel="noreferrer" title="Github Repo"
-                className="fixed right-0 bottom-0 bg-gray-800 p-5 rounded-tl-3xl hover:bg-gray-600"
+                className="fixed right-0 bottom-0 bg-gray-800 p-5 rounded-tl-3xl border-l-2 border-white hover:bg-gray-600"
               >
                 <SiGithub className="text-2xl"/>
               </a>
