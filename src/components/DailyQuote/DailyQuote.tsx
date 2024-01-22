@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const stoicUrl = "https://stoic-server.herokuapp.com/random";
+const stoicUrl = "https://stoic-quotes.com/api/quote";
 
 const authors = ["aurelius", "seneca", "epictetus"];
 
@@ -42,7 +42,9 @@ const DailyQuote = () => {
         <span>Loading...</span>
       )}
       <button
-        className={`text-gray-100 px-6 py-2 rounded-lg self-center ${loading ? "bg-gray-500 cursor-not-allowed" : "bg-gray-800"} `}
+        className={`text-gray-100 px-6 py-2 rounded-lg self-center ${
+          loading ? "bg-gray-500 cursor-not-allowed" : "bg-gray-800"
+        } `}
         onClick={fetchQoute}
         disabled={loading}
       >

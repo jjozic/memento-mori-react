@@ -1,4 +1,4 @@
-import { NavBar, DailyQuote, LifeCalendar, Footer } from '@components'
+import { DailyQuote, LifeCalendar, Footer, NavBar } from "./components";
 
 function App() {
   return (
@@ -13,4 +13,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
