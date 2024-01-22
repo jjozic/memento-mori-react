@@ -1,35 +1,43 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const stoicUrl = "https://stoic-quotes.com/api/quote";
 
-const authors = ["aurelius", "seneca", "epictetus"];
+const authors = ["Seneca", "Marcus Aurelius", "Epictetus"] as const;
+type Authors = typeof authors;
+type StoicQuoteResponse = {
+  text: string;
+  author: Authors;
+};
 
 const DailyQuote = () => {
-  type StoicQuoteResponse = {
-    text: string;
-    author: "Seneca" | "Marcus Aurelius" | "Epictetus";
-  };
   const [quote, setQuote] = useState<StoicQuoteResponse | null>(null);
   const [bgName, setBgName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<unknown | undefined>(undefined);
 
   useEffect(() => {
-    fetchQoute();
+    fetchQuote();
   }, []);
 
-  const fetchQoute = () => {
+  const fetchQuote = async () => {
     setLoading(true);
-    axios.get(stoicUrl).then((response) => {
-      setQuote(response.data[0] satisfies StoicQuoteResponse);
-      const resp = response.data[0].author.toLowerCase();
-      for (const author of authors) {
-        if (resp.includes(author)) {
-          setBgName(author);
-        }
+
+    try {
+      const response = await axios.get(stoicUrl);
+      const resp = response.data as StoicQuoteResponse;
+
+      setQuote(resp);
+
+      const matchingAuthor = authors.find((author) => resp.author.includes(author));
+      if (matchingAuthor) {
+        setBgName(matchingAuthor.replace(" ", "-").toLowerCase());
       }
+    } catch (error: unknown) {
+      setError(error);
+    } finally {
       setLoading(false);
-    });
+    }
   };
 
   return (
@@ -42,6 +50,8 @@ const DailyQuote = () => {
             <figcaption>-{` ${quote.author}`}</figcaption>
           </figure>
         </div>
+      ) : error ? (
+        <span>Oops! Something went wrong... Please try again later!</span>
       ) : (
         <span>Loading...</span>
       )}
@@ -49,7 +59,7 @@ const DailyQuote = () => {
         className={`text-gray-100 px-6 py-2 rounded-lg self-center ${
           loading ? "bg-gray-500 cursor-not-allowed" : "bg-gray-800"
         } `}
-        onClick={fetchQoute}
+        onClick={fetchQuote}
         disabled={loading}
       >
         Get another quote
