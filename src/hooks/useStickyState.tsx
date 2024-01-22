@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-export default function useStickyState(defaultValue, key) {
+export default function useStickyState<T>(defaultValue: T, key: string) {
   const [value, setValue] = React.useState(() => {
     const stickyValue = window.localStorage.getItem(key);
     return stickyValue !== null ? JSON.parse(stickyValue) : defaultValue;

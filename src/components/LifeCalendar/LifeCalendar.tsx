@@ -16,7 +16,7 @@ const createCalendar = (ageInMonths = 0) => {
   return cells;
 };
 
-const calculateAgeInMonths = (birthday) => {
+const calculateAgeInMonths = (birthday: Date) => {
   const date = new Date(birthday);
   let timeDiff = Date.now() - date.getTime();
 
@@ -33,7 +33,7 @@ const LifeCalendar = () => {
     setCalendar(createCalendar(calculateAgeInMonths(birthday)));
   }, [birthday]);
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBirthday(event.target.value);
   };
 

@@ -6,8 +6,12 @@ const stoicUrl = "https://stoic-quotes.com/api/quote";
 const authors = ["aurelius", "seneca", "epictetus"];
 
 const DailyQuote = () => {
-  const [quote, setQuote] = useState(null);
-  const [bgName, setBgName] = useState(null);
+  type StoicQuoteResponse = {
+    text: string;
+    author: "Seneca" | "Marcus Aurelius" | "Epictetus";
+  };
+  const [quote, setQuote] = useState<StoicQuoteResponse | null>(null);
+  const [bgName, setBgName] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -17,7 +21,7 @@ const DailyQuote = () => {
   const fetchQoute = () => {
     setLoading(true);
     axios.get(stoicUrl).then((response) => {
-      setQuote(response.data[0]);
+      setQuote(response.data[0] satisfies StoicQuoteResponse);
       const resp = response.data[0].author.toLowerCase();
       for (const author of authors) {
         if (resp.includes(author)) {
@@ -34,7 +38,7 @@ const DailyQuote = () => {
       {quote ? (
         <div className={`py-8 bg-${bgName} bg-opacity-2 bg-no-repeat bg-center min-h-200`}>
           <figure className="text-center text-gray-700">
-            <blockquote className="font-bold italic">"{quote.body}"</blockquote>
+            <blockquote className="font-bold italic">"{quote.text}"</blockquote>
             <figcaption>-{` ${quote.author}`}</figcaption>
           </figure>
         </div>
