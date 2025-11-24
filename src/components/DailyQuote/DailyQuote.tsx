@@ -67,13 +67,13 @@ const DailyQuote = () => {
   };
 
   return (
-    <div className="relative mb-[50px] flex min-h-[400px] w-full flex-col items-center justify-center overflow-hidden border border-ink-primary bg-bg-paper p-[40px_20px] text-center shadow-[0_0_0_4px_var(--color-bg-parchment),0_0_0_6px_var(--color-ink-primary),15px_15px_30px_rgba(0,0,0,0.15)] md:mb-0 md:p-[60px]">
+    <div className="relative mb-[30px] flex w-full max-w-full min-w-0 flex-col items-center justify-center overflow-hidden border border-ink-primary bg-bg-paper p-[20px_15px] pb-[100px] text-center shadow-[0_0_0_4px_var(--color-bg-parchment),0_0_0_6px_var(--color-ink-primary),15px_15px_30px_rgba(0,0,0,0.15)] sm:p-[30px_20px] sm:pb-[110px] md:mb-0 md:p-[40px] md:pb-[100px] lg:pb-[90px]">
       {/* Background Image Layer */}
       <div className="pointer-events-none absolute top-0 left-0 z-0 h-full w-full overflow-hidden">
         <img
           src={bgImageUrl}
           alt="Philosopher Statue"
-          className="h-full w-full object-cover opacity-[0.15] mix-blend-multiply contrast-120 grayscale sepia-40 transition-opacity duration-500 ease-in-out"
+          className="h-full w-full object-contain object-center opacity-[0.15] mix-blend-multiply contrast-120 grayscale sepia-40 transition-opacity duration-500 ease-in-out sm:object-cover"
           onError={(e) => {
             (e.target as HTMLImageElement).src = authorImages["default"];
           }}
@@ -83,17 +83,17 @@ const DailyQuote = () => {
       </div>
 
       {/* Content Layer */}
-      <div className="relative z-[1] max-w-[80%]">
+      <div className="relative z-[1] w-full max-w-[90%] pb-6 sm:max-w-[80%] sm:pb-8">
         {quote ? (
           <>
             <div
-              className={`mb-[30px] text-[1.6rem] leading-[1.3] text-ink-primary italic transition-opacity duration-300 [text-shadow:0_1px_0_rgba(255,255,255,0.5)] md:text-[2.2rem] ${
+              className={`mb-[16px] text-[1.2rem] leading-[1.4] text-ink-primary italic transition-opacity duration-300 [text-shadow:0_1px_0_rgba(255,255,255,0.5)] sm:mb-[20px] sm:text-[1.4rem] sm:leading-[1.3] md:text-[2.2rem] ${
                 loading ? "opacity-30" : "opacity-100"
               }`}
             >
               "{quote.text}"
             </div>
-            <cite className="mt-5 block border-t border-accent-gold pt-[15px] text-[1.1rem] font-black tracking-widest text-accent-red">
+            <cite className="block border-t border-accent-gold pt-[10px] text-[0.9rem] font-black tracking-widest text-accent-red sm:pt-[12px] sm:text-[1rem] md:text-[1.1rem]">
               - {quote.author}
             </cite>
           </>
@@ -108,7 +108,7 @@ const DailyQuote = () => {
 
       {/* Button */}
       <button
-        className={`absolute bottom-[30px] left-1/2 z-[2] min-w-[220px] -translate-x-1/2 transform cursor-pointer border-2 border-ink-primary bg-transparent px-[35px] py-[15px] text-[0.9rem] font-bold tracking-[0.15em] whitespace-nowrap text-ink-primary transition-all duration-300 ease-in-out hover:bg-ink-primary hover:text-bg-parchment hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] disabled:cursor-not-allowed disabled:opacity-50`}
+        className={`absolute bottom-[20px] left-1/2 z-[2] max-w-[calc(100%-30px)] min-w-[180px] -translate-x-1/2 transform cursor-pointer border-2 border-ink-primary bg-transparent px-[20px] py-[10px] text-[0.8rem] font-bold tracking-[0.15em] whitespace-nowrap text-ink-primary transition-all duration-300 ease-in-out hover:bg-ink-primary hover:text-bg-parchment hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] disabled:cursor-not-allowed disabled:opacity-50 sm:min-w-[200px] sm:px-[25px] sm:py-[12px] sm:text-[0.85rem] md:min-w-[220px] md:px-[35px] md:text-[0.9rem]`}
         onClick={fetchQuote}
         disabled={loading}
       >
