@@ -1,5 +1,3 @@
-import { SiGithub } from "react-icons/si";
-
 const NavBar = () => {
   return (
     <header className="pt-12">
@@ -10,15 +8,6 @@ const NavBar = () => {
       <div className="mb-[30px] text-center text-sm font-bold tracking-[0.2em] text-accent-red sm:text-base">
         Daily Inspiration
       </div>
-      <a
-        href="https://github.com/jjozic/memento-mori-react"
-        target="_blank"
-        rel="noreferrer"
-        title="Github Repo"
-        className="fixed right-0 bottom-0 z-50 rounded-tl-3xl border-l-2 border-bg-parchment bg-ink-primary p-4 transition-colors hover:bg-ink-secondary sm:p-5"
-      >
-        <SiGithub className="text-xl text-bg-parchment sm:text-2xl" />
-      </a>
     </header>
   );
 };
