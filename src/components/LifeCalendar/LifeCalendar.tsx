@@ -16,7 +16,7 @@ const createCalendar = (ageInMonths = 0) => {
   return cells;
 };
 
-const calculateAgeInMonths = (birthday: Date) => {
+const calculateAgeInMonths = (birthday: string | number) => {
   const date = new Date(birthday);
   let timeDiff = Date.now() - date.getTime();
 
@@ -24,10 +24,15 @@ const calculateAgeInMonths = (birthday: Date) => {
   return Math.round(timeDiff / (24 * 3600 * 1000 * 30));
 };
 
+const getDefaultBirthday = (): string => {
+  const date = new Date();
+  date.setFullYear(date.getFullYear() - 25); // Default to 25 years ago
+  return date.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+};
+
 const LifeCalendar = () => {
-  // const [birthday, setBirthday] = useState(Date.now());
   const [calendar, setCalendar] = useState(createCalendar());
-  const [birthday, setBirthday] = useStickyState(Date.now(), "birthday");
+  const [birthday, setBirthday] = useStickyState<string>(getDefaultBirthday(), "birthday");
 
   useEffect(() => {
     setCalendar(createCalendar(calculateAgeInMonths(birthday)));
@@ -47,7 +52,7 @@ const LifeCalendar = () => {
         id="start"
         name="trip-start"
         min="1900-01-01"
-        max="2022-01-01"
+        max={new Date().toISOString().split('T')[0]}
         value={birthday}
         onChange={handleChange}
       />

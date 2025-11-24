@@ -31,7 +31,13 @@ const DailyQuote = () => {
 
       const matchingAuthor = authors.find((author) => resp.author.includes(author));
       if (matchingAuthor) {
-        setBgName(matchingAuthor.replace(" ", "-").toLowerCase());
+        // Map author names to image file names
+        const authorImageMap: Record<string, string> = {
+          Seneca: "seneca",
+          "Marcus Aurelius": "aurelius",
+          Epictetus: "epictetus",
+        };
+        setBgName(authorImageMap[matchingAuthor] || "");
       }
     } catch (error: unknown) {
       setError(error);
@@ -40,14 +46,24 @@ const DailyQuote = () => {
     }
   };
 
+  const backgroundImageStyle = bgName
+    ? {
+        backgroundImage: `url(/${bgName}.png)`,
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        opacity: 0.15,
+      }
+    : {};
+
   return (
-    <div className="flex-1 py-8 px-4 flex flex-col gap-2">
-      <h2 className="font-bold pb-8 text-lg">Daily Inspiration</h2>
+    <div className="flex-1 py-8 px-4 flex flex-col gap-4">
+      <h2 className="font-bold pb-4 text-lg">Daily Inspiration</h2>
       {quote ? (
-        <div className={`py-8 bg-${bgName} bg-opacity-2 bg-no-repeat bg-center min-h-200`}>
-          <figure className="text-center text-gray-700">
-            <blockquote className="font-bold italic">"{quote.text}"</blockquote>
-            <figcaption>-{` ${quote.author}`}</figcaption>
+        <div className="py-8 min-h-[300px] flex items-center justify-center" style={backgroundImageStyle}>
+          <figure className="text-center text-gray-700 max-w-2xl">
+            <blockquote className="font-bold italic text-lg">"{quote.text}"</blockquote>
+            <figcaption className="mt-4">-{` ${quote.author}`}</figcaption>
           </figure>
         </div>
       ) : error ? (
@@ -56,7 +72,7 @@ const DailyQuote = () => {
         <span>Loading...</span>
       )}
       <button
-        className={`text-gray-100 px-6 py-2 rounded-lg self-center ${
+        className={`text-gray-100 px-6 py-2 rounded-lg self-center mt-4 ${
           loading ? "bg-gray-500 cursor-not-allowed" : "bg-gray-800"
         } `}
         onClick={fetchQuote}
