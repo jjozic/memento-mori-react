@@ -3,11 +3,11 @@ import { SiGithub } from "react-icons/si";
 const NavBar = () => {
   return (
     <header>
-      <h1 className="text-[2.5rem] md:text-[3.5rem] tracking-[0.15em] my-[50px_0_10px_0] text-[var(--color-ink-primary)] text-center relative inline-block font-[var(--font-display)] uppercase">
+      <h1 className="relative my-[50px_0_10px_0] inline-block text-center text-[2.5rem] font-[var(--font-display)] tracking-[0.15em] text-ink-primary uppercase md:text-[3.5rem]">
         Memento Mori
-        <span className="block w-[60%] h-0.5 bg-[var(--color-accent-red)] mx-auto mt-2.5"></span>
+        <span className="mx-auto mt-2.5 block h-0.5 w-[60%] bg-accent-red"></span>
       </h1>
-      <div className="text-base tracking-[0.2em] text-[var(--color-accent-red)] mb-[60px] font-bold text-center">
+      <div className="mb-[60px] text-center text-base font-bold tracking-[0.2em] text-accent-red">
         Daily Inspiration
       </div>
       <a
@@ -15,9 +15,9 @@ const NavBar = () => {
         target="_blank"
         rel="noreferrer"
         title="Github Repo"
-        className="fixed right-0 bottom-0 bg-[var(--color-ink-primary)] p-5 rounded-tl-3xl border-l-2 border-[var(--color-bg-parchment)] hover:bg-[var(--color-ink-secondary)] transition-colors"
+        className="fixed right-0 bottom-0 rounded-tl-3xl border-l-2 border-bg-parchment bg-ink-primary p-5 transition-colors hover:bg-ink-secondary"
       >
-        <SiGithub className="text-2xl text-[var(--color-bg-parchment)]" />
+        <SiGithub className="text-2xl text-bg-parchment" />
       </a>
     </header>
   );

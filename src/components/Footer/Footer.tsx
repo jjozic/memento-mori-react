@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="mt-auto py-[60px] px-5 text-center text-[0.85rem] text-[var(--color-ink-secondary)] font-[var(--font-display)] opacity-70">
+    <footer className="mt-auto px-5 py-[60px] text-center text-[0.85rem] font-[var(--font-display)] text-ink-secondary opacity-70">
       Made by Julian Jozic &bull; Inspired by Tim Urban
     </footer>
   );

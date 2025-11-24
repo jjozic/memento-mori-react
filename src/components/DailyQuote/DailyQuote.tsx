@@ -67,13 +67,13 @@ const DailyQuote = () => {
   };
 
   return (
-    <div className="relative w-full min-h-[400px] bg-[var(--color-bg-paper)] border border-[var(--color-ink-primary)] shadow-[0_0_0_4px_var(--color-bg-parchment),0_0_0_6px_var(--color-ink-primary),15px_15px_30px_rgba(0,0,0,0.15)] flex flex-col justify-center items-center p-[40px_20px] md:p-[60px] overflow-hidden md:mb-0 mb-[50px] text-center">
+    <div className="relative mb-[50px] flex min-h-[400px] w-full flex-col items-center justify-center overflow-hidden border border-ink-primary bg-bg-paper p-[40px_20px] text-center shadow-[0_0_0_4px_var(--color-bg-parchment),0_0_0_6px_var(--color-ink-primary),15px_15px_30px_rgba(0,0,0,0.15)] md:mb-0 md:p-[60px]">
       {/* Background Image Layer */}
-      <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none overflow-hidden">
+      <div className="pointer-events-none absolute top-0 left-0 z-0 h-full w-full overflow-hidden">
         <img
           src={bgImageUrl}
           alt="Philosopher Statue"
-          className="w-full h-full object-cover opacity-[0.15] grayscale sepia-[40%] contrast-[120%] mix-blend-multiply transition-opacity duration-500 ease-in-out"
+          className="h-full w-full object-cover opacity-[0.15] mix-blend-multiply contrast-120 grayscale sepia-40 transition-opacity duration-500 ease-in-out"
           onError={(e) => {
             (e.target as HTMLImageElement).src = authorImages["default"];
           }}
@@ -87,26 +87,28 @@ const DailyQuote = () => {
         {quote ? (
           <>
             <div
-              className={`text-[1.6rem] md:text-[2.2rem] leading-[1.3] italic mb-[30px] text-[var(--color-ink-primary)] [text-shadow:0_1px_0_rgba(255,255,255,0.5)] transition-opacity duration-300 ${
+              className={`mb-[30px] text-[1.6rem] leading-[1.3] text-ink-primary italic transition-opacity duration-300 [text-shadow:0_1px_0_rgba(255,255,255,0.5)] md:text-[2.2rem] ${
                 loading ? "opacity-30" : "opacity-100"
               }`}
             >
               "{quote.text}"
             </div>
-            <cite className="font-[var(--font-display)] font-black text-[1.1rem] tracking-[0.1em] text-[var(--color-accent-red)] block mt-5 border-t border-[var(--color-accent-gold)] pt-[15px] inline-block">
+            <cite className="mt-5 block border-t border-accent-gold pt-[15px] text-[1.1rem] font-black tracking-widest text-accent-red">
               - {quote.author}
             </cite>
           </>
         ) : error ? (
-          <div className="text-[var(--color-ink-primary)]">Oops! Something went wrong... Please try again later!</div>
+          <div className="text-ink-primary">
+            Oops! Something went wrong... Please try again later!
+          </div>
         ) : (
-          <div className="text-[var(--color-ink-primary)]">Loading...</div>
+          <div className="text-ink-primary">Loading...</div>
         )}
       </div>
 
       {/* Button */}
       <button
-        className={`absolute bottom-[30px] left-1/2 transform -translate-x-1/2 z-[2] bg-transparent border-2 border-[var(--color-ink-primary)] px-[35px] py-[15px] text-[0.9rem] font-bold tracking-[0.15em] cursor-pointer transition-all duration-300 ease-in-out text-[var(--color-ink-primary)] hover:bg-[var(--color-ink-primary)] hover:text-[var(--color-bg-parchment)] hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap min-w-[220px]`}
+        className={`absolute bottom-[30px] left-1/2 z-[2] min-w-[220px] -translate-x-1/2 transform cursor-pointer border-2 border-ink-primary bg-transparent px-[35px] py-[15px] text-[0.9rem] font-bold tracking-[0.15em] whitespace-nowrap text-ink-primary transition-all duration-300 ease-in-out hover:bg-ink-primary hover:text-bg-parchment hover:shadow-[0_5px_15px_rgba(0,0,0,0.2)] disabled:cursor-not-allowed disabled:opacity-50`}
         onClick={fetchQuote}
         disabled={loading}
       >

@@ -4,8 +4,8 @@ function App() {
   return (
     <>
       <NavBar />
-      <div className="w-full max-w-[1200px] px-5 mb-[60px]">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="mb-[60px] w-full max-w-[1200px] px-5">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <DailyQuote />
           <LifeCalendar />
         </div>
