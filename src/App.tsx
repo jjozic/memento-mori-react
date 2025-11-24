@@ -4,10 +4,12 @@ function App() {
   return (
     <>
       <NavBar />
-      <main className="flex flex-wrap max-w-screen-xl mx-auto min-h-full">
-        <DailyQuote />
-        <LifeCalendar />
-      </main>
+      <div className="w-full max-w-[1200px] px-5 mb-[60px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <DailyQuote />
+          <LifeCalendar />
+        </div>
+      </div>
       <Footer />
     </>
   );
