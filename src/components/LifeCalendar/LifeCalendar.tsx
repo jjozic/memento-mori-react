@@ -5,6 +5,37 @@ const LIFE_YEARS = 80;
 const MONTHS_TOTAL = LIFE_YEARS * 12;
 const MONTHS_PER_ROW = 36; // 3 years per row
 
+interface CalendarCellProps {
+  isPassed: boolean;
+  ageYear: number;
+}
+
+const CalendarCell = ({ isPassed, ageYear }: CalendarCellProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      className="group relative -m-0.5 p-0.5"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div
+        className={`h-2 w-2 border border-[rgba(26,15,10,0.2)] transition-all duration-200 ease-out md:h-3 md:w-3 lg:h-3.5 lg:w-3.5 ${
+          isPassed
+            ? "border-border-color bg-border-color [box-shadow:inset_0_0_2px_rgba(0,0,0,0.3)]"
+            : "bg-transparent"
+        } group-hover:z-20 group-hover:scale-125 group-hover:border-accent-red group-hover:bg-accent-red group-hover:shadow-[0_0_4px_rgba(138,28,28,0.4)]`}
+      />
+      {isHovered && (
+        <div className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-2 -translate-x-1/2 rounded-sm bg-ink-primary px-2 py-1 text-[0.7rem] font-[var(--font-display)] tracking-wider whitespace-nowrap text-white shadow-lg">
+          Age {ageYear}
+          <div className="absolute top-full left-1/2 -mt-px -translate-x-1/2 border-4 border-transparent border-t-ink-primary"></div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const createCalendar = (monthsPassed = 0) => {
   const rows: Array<Array<React.ReactElement>> = [];
   const totalRows = Math.ceil(MONTHS_TOTAL / MONTHS_PER_ROW);
@@ -17,21 +48,15 @@ const createCalendar = (monthsPassed = 0) => {
       const monthIndex = startMonth + i;
       if (monthIndex >= MONTHS_TOTAL) break;
 
-      const cellID = `cell${monthIndex}`;
       const ageYear = Math.floor(monthIndex / 12);
       const isPassed = monthIndex < monthsPassed;
 
       rowCells.push(
-        <div
-          className={`h-2 w-2 border border-[rgba(26,15,10,0.2)] transition-all duration-300 ease-in-out md:h-3 md:w-3 lg:h-3.5 lg:w-3.5 ${
-            isPassed
-              ? "border-ink-primary bg-ink-primary [box-shadow:inset_0_0_2px_rgba(0,0,0,0.5)]"
-              : "bg-transparent"
-          } hover:z-10 hover:scale-[2] hover:border-accent-red hover:bg-accent-red`}
-          key={cellID}
-          id={cellID}
-          title={`Age: ${ageYear}`}
-        ></div>,
+        <CalendarCell
+          key={`cell${monthIndex}`}
+          isPassed={isPassed}
+          ageYear={ageYear}
+        />,
       );
     }
 
@@ -107,7 +132,7 @@ const LifeCalendar = () => {
       {/* Grid Legend */}
       <div className="mb-3 flex justify-center gap-6 text-[0.7rem] font-[var(--font-display)] tracking-widest text-ink-secondary uppercase sm:gap-10 sm:text-[0.75rem]">
         <div className="flex items-center gap-2">
-          <div className="h-2 w-2 border border-ink-primary bg-ink-primary sm:h-3 sm:w-3"></div>
+          <div className="h-2 w-2 border border-border-color bg-border-color sm:h-3 sm:w-3"></div>
           <span>Passed</span>
         </div>
         <div className="flex items-center gap-2">
