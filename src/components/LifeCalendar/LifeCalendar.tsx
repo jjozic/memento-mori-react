@@ -1,7 +1,7 @@
 import { useState, useRef, useMemo, memo, useCallback, useEffect } from "react";
 import useStickyState from "../../hooks/useStickyState";
 
-const LIFE_YEARS = 80;
+const LIFE_YEARS = 90;
 const MONTHS_TOTAL = LIFE_YEARS * 12;
 const MONTHS_PER_ROW = 36; // 3 years per row
 
@@ -231,7 +231,7 @@ const LifeCalendar = () => {
           </button>
           <div className="mx-auto mt-8 max-w-[600px] px-2 text-[0.9rem] text-ink-secondary sm:text-[1rem]">
             <p>
-              The average human life span is around <strong>80 years</strong>.
+              The average human life span is around <strong>90 years</strong>.
               This chart maps the days of your life. Filled squares are time
               spent. Empty squares are time remaining.
             </p>
@@ -243,7 +243,7 @@ const LifeCalendar = () => {
 
   // Show calendar if birthday is confirmed
   return (
-    <div className="flex flex-col lg:pl-6">
+    <div className="flex min-w-0 flex-col lg:pl-6">
       {/* Change Birthday Button */}
       <div className="mb-4 flex justify-end">
         <button
@@ -267,8 +267,8 @@ const LifeCalendar = () => {
       </div>
 
       {/* Calendar Grid */}
-      <div className="flex w-full justify-center overflow-x-auto pb-2 lg:overflow-x-visible">
-        <div className="flex" ref={gridRef}>
+      <div className="w-full max-w-full overflow-x-auto pb-3 2xl:overflow-x-visible">
+        <div className="mx-auto flex w-max pr-4 2xl:pr-0" ref={gridRef}>
           {/* Left Labels Column - Sticky on mobile scroll */}
           <div className="sticky left-0 z-10 flex flex-col justify-start gap-0.5 bg-bg-parchment pr-2 lg:relative lg:z-0 lg:bg-transparent">
             {calendarData.map((row, rowIndex) => {
